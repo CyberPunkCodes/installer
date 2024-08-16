@@ -328,7 +328,7 @@ class NewCommand extends Command
             );
         }
 
-        $databaseName = $dbname ?? str_replace('-', '_', strtolower($name));
+        $databaseName = empty($dbname) ? str_replace('-', '_', strtolower($name)) : $dbname;
 
         $this->replaceInFile(
             'DB_DATABASE=laravel',
@@ -342,7 +342,7 @@ class NewCommand extends Command
             $directory.'/.env.example'
         );
 
-        $databaseUsername = $dbuser ?? 'root';
+        $databaseUsername = empty($dbuser) ? 'root' : '';
 
         $this->replaceInFile(
             'DB_USERNAME=root',
